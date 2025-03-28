@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.13)
+include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
+
+project(IMU_Module_Project)
+pico_sdk_init()
+
+add_library(imu_module imu_module.cpp)
+target_link_libraries(imu_module pico_stdlib hardware_i2c)
+
+add_executable(imu_test main.cpp)
+target_link_libraries(imu_test pico_stdlib hardware_i2c imu_module)
+
+pico_add_extra_outputs(imu_test)
